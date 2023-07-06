@@ -5,6 +5,7 @@ echo "Do you like it? [Y/n]"
 read like
 if [ "$like" != Y ];
 then
+    rm -rf nvim-config-tidy
     exit 1
 fi
 
@@ -20,7 +21,7 @@ then
     mkdir -p ~/.config/nvim/
     mv nvim-config-tidy/init.lua ~/.config/nvim/
     rm -rf nvim-config-tidy
-    nvim
+    echo "Have a happy use!"
 else
     echo "You can use nvim -u $(pwd)/nvim-config-tidy/init.lua to startup."
 fi
