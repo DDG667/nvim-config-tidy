@@ -1,4 +1,3 @@
-
 # git clone https://github.com/DDG667/nvim-config-tidy
 nvim -u nvim-config-tidy/init.lua
 
@@ -20,7 +19,7 @@ then
     rm -rf ~/.config/nvim/
     mkdir -p ~/.config/nvim/
     mv nvim-config-tidy/init.lua ~/.config/nvim/
-    # rm -rf nvim-config-tidy
+    rm -rf nvim-config-tidy
     nvim
 else
     echo "You can use nvim -u $(pwd)/nvim-config-tidy/init.lua to startup."
