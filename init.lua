@@ -39,7 +39,13 @@ require("lazy").setup({
     { "nvim-treesitter/nvim-treesitter",    dependencies = { "HiPhish/nvim-ts-rainbow2" } },
     { "windwp/nvim-autopairs" },
     { "neovim/nvim-lspconfig" },
-    { "L3MON4D3/LuaSnip" },
+    {
+        "L3MON4D3/LuaSnip",
+        dependencies = { "rafamadriz/friendly-snippets" },
+        config = function()
+            require("luasnip.loaders.from_vscode").lazy_load()
+        end,
+    },
     { "feline-nvim/feline.nvim",            dependencies = { "kyazdani42/nvim-web-devicons" } },
     { "lukas-reineke/indent-blankline.nvim" },
     {
