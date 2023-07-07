@@ -35,9 +35,39 @@ end
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     { "williamboman/mason.nvim" },
-    { "navarasu/onedark.nvim",              lazy = true },
-    { "nvim-treesitter/nvim-treesitter",    dependencies = { "HiPhish/nvim-ts-rainbow2" } },
+    { "navarasu/onedark.nvim",           lazy = true },
+    { "nvim-treesitter/nvim-treesitter", dependencies = { "HiPhish/nvim-ts-rainbow2" } },
     { "windwp/nvim-autopairs" },
+    {
+        "nvim-tree/nvim-tree.lua",
+        dependencies = { "kyazdani42/nvim-web-devicons" },
+        config = function()
+            require("nvim-tree").setup({
+                sort_by = "case_sensitive",
+                renderer = {
+                    group_empty = true,
+                },
+                filters = {
+                    dotfiles = true,
+                },
+            })
+        end,
+    },
+    { "romgrk/barbar.nvim" ,config=function ()
+require("bufferline").setup({
+    auto_hide = true,
+    tabpages = true,
+    closable = true,
+    clickable = true,
+    --icons = true,
+    insert_at_end = false,
+    insert_at_start = false,
+    maximum_padding = 1,
+    minimum_padding = 1,
+    maximum_length = 30,
+    no_name_title = nil,
+})
+    end},
     { "neovim/nvim-lspconfig" },
     {
         "L3MON4D3/LuaSnip",
@@ -564,3 +594,10 @@ for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
+
+local status, bufferline = pcall(require, "bufferline")
+if not status then
+    print("ERROR bufferline")
+    return
+end
+
