@@ -35,6 +35,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     { "williamboman/mason.nvim" },
+    {"lukas-reineke/lsp-format.nvim"},
     { "navarasu/onedark.nvim",           lazy = true },
     { "nvim-treesitter/nvim-treesitter", dependencies = { "HiPhish/nvim-ts-rainbow2" } },
     { "windwp/nvim-autopairs" },
@@ -367,7 +368,10 @@ local opts = { noremap = true, silent = true }
 vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, opts)
 vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
 
+
+require("lsp-format").setup {}
 local on_attach = function(client, bufnr)
+    require("lsp-format").on_attach(client)
     --[[require("lsp_signature").on_attach({
         bind = true, -- This is mandatory, otherwise border config won't get registered.
         handler_opts = {
@@ -612,3 +616,4 @@ vim.api.nvim_create_autocmd({ "BufWritePost,TextChanged" }, {
     require("lint").try_lint()
   end,
 })
+
