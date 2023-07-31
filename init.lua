@@ -78,6 +78,7 @@ require("bufferline").setup({
     },
     { "feline-nvim/feline.nvim",            dependencies = { "kyazdani42/nvim-web-devicons" } },
     { "lukas-reineke/indent-blankline.nvim" },
+    {"mfussenegger/nvim-lint"},
     {
         "hrsh7th/nvim-cmp",
         dependencies = {
@@ -601,3 +602,13 @@ if not status then
     return
 end
 
+require('lint').linters_by_ft = {
+
+}
+
+
+vim.api.nvim_create_autocmd({ "BufWritePost,TextChanged" }, {
+  callback = function()
+    require("lint").try_lint()
+  end,
+})
